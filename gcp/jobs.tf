@@ -1,5 +1,5 @@
 locals {
-  nomad_addr = "http://${digitalocean_droplet.server.ipv4_address}:4646"
+  nomad_addr = "http://${google_compute_instance.server.network_interface.0.access_config.0.nat_ip}:4646"
 }
 
 provider "nomad" {

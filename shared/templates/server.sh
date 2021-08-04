@@ -25,7 +25,7 @@ hashi-up consul install --local \
   --server \
   --connect \
   --client-addr 0.0.0.0 \
-  --advertise-addr "{{ GetInterfaceIP \"eth1\" }}"
+  --advertise-addr "{{ GetInterfaceIP \"${interface}\" }}"
 
 # install and start Vault
 hashi-up vault install \
@@ -75,7 +75,7 @@ vault write /auth/token/roles/nomad-cluster @nomad-cluster-role.json
 # install and start Nomad
 hashi-up nomad install --local \
   --server \
-  --advertise "{{ GetInterfaceIP \"eth1\" }}" \
+  --advertise "{{ GetInterfaceIP \"${interface}\" }}" \
   --skip-start
 
 sudo tee /etc/nomad.d/config/vault.hcl >/dev/null <<EOF

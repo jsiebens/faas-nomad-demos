@@ -43,7 +43,7 @@ resource "digitalocean_droplet" "server" {
   region    = var.region
   size      = "s-1vcpu-1gb"
   tags      = [digitalocean_tag.main.id, digitalocean_tag.server.id]
-  user_data = templatefile("${path.module}/templates/server.sh", { token = random_password.token.result })
+  user_data = templatefile("${path.module}/../shared/templates/server.sh", { token = random_password.token.result, interface = "eth1" })
   vpc_uuid  = digitalocean_vpc.this.id
   ssh_keys  = [var.ssh_key]
 }
@@ -55,7 +55,7 @@ resource "digitalocean_droplet" "client" {
   region    = var.region
   size      = "s-1vcpu-2gb"
   tags      = [digitalocean_tag.main.id, digitalocean_tag.client.id]
-  user_data = templatefile("${path.module}/templates/client.sh", { server_ip = digitalocean_droplet.server.ipv4_address_private })
+  user_data = templatefile("${path.module}/../shared/templates/client.sh", { server_ip = digitalocean_droplet.server.ipv4_address_private, interface = "eth1" })
   vpc_uuid  = digitalocean_vpc.this.id
   ssh_keys  = [var.ssh_key]
 }

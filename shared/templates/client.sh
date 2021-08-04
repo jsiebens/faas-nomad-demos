@@ -38,12 +38,12 @@ sudo mv /etc/resolv.conf.new /etc/resolv.conf
 hashi-up consul install --local \
   --connect \
   --client-addr 0.0.0.0 \
-  --advertise-addr "{{ GetInterfaceIP \"eth1\" }}" \
+  --advertise-addr "{{ GetInterfaceIP \"${interface}\" }}" \
   --retry-join ${server_ip}
 
 hashi-up nomad install --local \
   --client \
-  --advertise "{{ GetInterfaceIP \"eth1\" }}" \
+  --advertise "{{ GetInterfaceIP \"${interface}\" }}" \
   --skip-start
 
 sudo tee /etc/nomad.d/config/vault.hcl >/dev/null <<EOF
@@ -55,7 +55,7 @@ EOF
 
 sudo tee /etc/nomad.d/config/client.hcl >/dev/null <<EOF
 client {
-  network_interface = "eth1"
+  network_interface = "${interface}"
 }
 EOF
 
