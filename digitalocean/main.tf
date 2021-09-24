@@ -103,6 +103,8 @@ resource "digitalocean_firewall" "server" {
 
   tags = [digitalocean_tag.server.id]
 
+  droplet_ids = [digitalocean_droplet.server.id]
+
   inbound_rule {
     protocol         = "tcp"
     port_range       = "1-65535"

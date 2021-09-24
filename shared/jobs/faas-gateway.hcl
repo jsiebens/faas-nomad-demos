@@ -32,7 +32,7 @@ job "faas-gateway" {
         basic_auth           = "true"
         secret_mount_path    = "/run/secrets"
         gateway_invoke       = "true"
-        faas_gateway_address = "gateway.service.consul"
+        faas_gateway_address = "faas-gateway.service.consul"
         faas_gateway_port    = "8080"
         faas_nats_address    = "nats.service.consul"
         faas_nats_port       = "4222"
@@ -140,7 +140,7 @@ job "faas-gateway" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/jsiebens/faas-nomad:latest"
+        image = "ttl.sh/58aefe82-0464-4c9e-b068-01b4034b81ae:1h"
         ports = ["provider"]
       }
 
