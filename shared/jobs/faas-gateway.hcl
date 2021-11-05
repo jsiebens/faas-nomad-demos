@@ -140,7 +140,7 @@ job "faas-gateway" {
       driver = "docker"
 
       config {
-        image = "ttl.sh/58aefe82-0464-4c9e-b068-01b4034b81ae:1h"
+        image = "ghcr.io/jsiebens/faas-nomad:latest"
         ports = ["provider"]
       }
 
